@@ -1,0 +1,201 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>体育用品商城</title>
+    
+    <link rel="stylesheet" type="text/css" href="login_register_Style/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="login_register_Style/css/register.css" />
+    
+    <script type="text/javascript" src="login_register_Style/js/register.js"></script>
+	
+	<!-- angularjs -->
+	<script type="text/javascript" src="plugins/angularjs/angular.min.js"></script>
+    
+    <script type="text/javascript" src="js/base.js"></script>
+    <script type="text/javascript" src="js/service/sellerService.js"></script>
+    <script type="text/javascript" src="js/controller/baseController.js"></script>
+    <script type="text/javascript" src="js/controller/sellerController.js"></script>
+</head>
+
+<body ng-app="pinyougou" ng-controller="sellerController">
+<header>
+    <div class="container">
+        <div class="col-md-1 col-md-offset-3 logo">
+            <h1><img src="loginStyle/images/shopcar.jpg" alt=""/></h1>
+        </div>
+		
+		<div class="col-md-5 col-md-offset-1 pageTitle text-center">
+            <h1>欢迎登录体育用品商城</h1>
+        </div>
+    </div>
+</header>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 formMain">
+                <form action="#">
+                    <div class="form-group form-horizontal">
+                        <span class="col-md-3 text-center" ng-model="entity.sellerId" style="margin-top:6px">用户名：</span>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group form-horizontal">
+                        <span class="col-md-3 text-center" ng-model="entity.password" style="margin-top:6px">密码：</span>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group form-horizontal">
+                        <span class="col-md-3 text-center" ng-model="entity.nickName" style="margin-top:6px">店铺名称：</span>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group form-horizontal">
+                        <span class="col-md-3 text-center" ng-model="entity.name" style="margin-top:6px">公司名称：</span>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group form-horizontal">
+                        <span class="col-md-3 text-center" ng-model="entity.telephone" style="margin-top:6px">公司电话：</span>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group form-horizontal">
+                        <span class="col-md-3 text-center" ng-model="entity.addressDetail" style="margin-top:6px">公司详细地址：</span>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group form-horizontal">
+                        <span class="col-md-3 text-center" ng-model="entity.linkmanName" style="margin-top:6px">联系人姓名：</span>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group form-horizontal">
+                        <span class="col-md-3 text-center" ng-model="entity.linkmanQq" style="margin-top:6px"> 联系人QQ：</span>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group form-horizontal">
+                        <span class="col-md-3 text-center" ng-model="entity.linkmanMobile" style="margin-top:6px"> 联系人手机：</span>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group form-horizontal">
+                        <span class="col-md-3 text-center" ng-model="entity.linkmanEmail" style="margin-top:6px"> 联系人EMAIL：</span>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group form-horizontal">
+                        <span class="col-md-3 text-center" ng-model="entity.licenseNumber" style="margin-top:6px"> 营业执照号：</span>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group form-horizontal">
+                        <span class="col-md-3 text-center" ng-model="entity.taxNumber" style="margin-top:6px"> 税务登记证号：</span>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group form-horizontal">
+                        <span class="col-md-3 text-center" ng-model="entity.orgNumber" style="margin-top:6px"> 组织机构代码证：</span>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group form-horizontal">
+                        <span class="col-md-3 text-center" ng-model="entity.legalPerson" style="margin-top:6px"> 法定代表人：</span>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group form-horizontal">
+                        <span class="col-md-3 text-center" ng-model="entity.legalPersonCardId" style="margin-top:6px"> 法定代表人身份证号：</span>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group form-horizontal">
+                        <span class="col-md-3 text-center" ng-model="entity.bankName" style="margin-top:6px"> 开户行名称：</span>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group form-horizontal">
+                        <span class="col-md-3 text-center" ng-model="entity.bankName" style="margin-top:6px"> 开户行支行：</span>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group form-horizontal">
+                        <span class="col-md-3 text-center" ng-model="entity.bankUser" style="margin-top:6px"> 银行账号：</span>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 30px;">
+                        <div class="col-md-7 col-md-offset-3">
+                            <input type="checkbox"/>
+                            同意协议并注册
+							<a href="#">《体育商城商家入驻协议》</a>
+                        </div>
+                    </div>
+					
+                    <div class="form-group" style="margin-top: 30px;">
+						<div class="col-md-5 col-md-offset-3">
+							<span class="text-danger">用户名或密码错误</span>
+						</div>
+                    </div>
+					
+                    <div class="form-group ">
+                        <div class="col-md-8 col-md-offset-3">
+                            <a href="#" class="btn btn-danger form-control">注册</a>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-md-6 col-md-offset-3">
+                            <p><a href="shoplogin.html">去登录</a></p>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="text-center">
+    <p>Copyright2019 zyf All Rights Reserved</p>
+    <p>邮箱：297411031@qq.com</p>
+    <p>建议使用1024*768以上分辨率浏览</p>
+</footer>
+</body>
+
+</html>

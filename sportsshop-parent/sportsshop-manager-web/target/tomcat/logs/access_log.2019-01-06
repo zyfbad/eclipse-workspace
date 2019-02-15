@@ -1,0 +1,4 @@
+0:0:0:0:0:0:0:1 - - [06/Jan/2019:14:40:59 +0800] "GET /zyf/showName.do HTTP/1.1" 200 3 http-bio-9103-exec-2 2824
+0:0:0:0:0:0:0:1 - - [06/Jan/2019:14:40:59 +0800] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-9103-exec-3 8
+0:0:0:0:0:0:0:1 - - [06/Jan/2019:14:43:55 +0800] "GET /brand/showName.do HTTP/1.1" 200 5 http-bio-9103-exec-1 2733
+127.0.0.1 - - [06/Jan/2019:15:38:43 +0800] "GET /brand/findAll.do HTTP/1.1" 200 908 http-bio-9103-exec-2 3629
