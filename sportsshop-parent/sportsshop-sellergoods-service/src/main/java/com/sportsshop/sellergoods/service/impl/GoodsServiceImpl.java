@@ -1,4 +1,5 @@
 package com.sportsshop.sellergoods.service.impl;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.mysql.fabric.xmlrpc.base.Array;
 import com.sportsshop.mapper.TbBrandMapper;
 import com.sportsshop.mapper.TbGoodsDescMapper;
 import com.sportsshop.mapper.TbGoodsMapper;
@@ -275,6 +277,23 @@ public class GoodsServiceImpl implements GoodsService {
 			goods.setAuditStatus(status);
 			goodsMapper.updateByPrimaryKey(goods);
 		}
+	}
+
+	
+	/**
+	 * 根据商品的Id和状态查找item列表
+	 */
+	@Override
+	public List<TbItem> findItemListByGoodsIdAndStatus(Long[] ids, String status) {
+		
+		TbItemExample example = new TbItemExample();
+		com.sportsshop.pojo.TbItemExample.Criteria criteria = example.createCriteria();
+		criteria.andGoodsIdIn(Arrays.asList(ids));
+		criteria.andStatusEqualTo(status);
+		
+		List<TbItem> itemList = itemMapper.selectByExample(example );
+		
+		return itemList;
 	}
 	
 }

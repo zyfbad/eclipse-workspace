@@ -1,6 +1,7 @@
 package com.sportsshop.sellergoods.service;
 import java.util.List;
 import com.sportsshop.pojo.TbGoods;
+import com.sportsshop.pojo.TbItem;
 import com.sportsshop.pojogroup.Goods;
 
 import entity.PageResult;
@@ -67,4 +68,12 @@ public interface GoodsService {
 	 */
 	
 	public void updateStatus(Long[] ids, String status);
+	
+	/**
+	 * 根据商品的Id和状态查找item列表
+	 * @param ids
+	 * @param status
+	 * @return
+	 */
+	public List<TbItem> findItemListByGoodsIdAndStatus(Long[] ids, String status);
 }

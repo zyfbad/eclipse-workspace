@@ -1,4 +1,5 @@
 package com.sportsshop.manager.controller;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestBody;
@@ -6,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.sportsshop.pojo.TbGoods;
+import com.sportsshop.pojo.TbItem;
 import com.sportsshop.pojogroup.Goods;
+import com.sportsshop.search.service.ItemSearchService;
 import com.sportsshop.sellergoods.service.GoodsService;
 
 import entity.PageResult;
@@ -22,6 +25,9 @@ public class GoodsController {
 
 	@Reference
 	private GoodsService goodsService;
+	
+	@Reference
+	private ItemSearchService itemSearchService;
 	
 	/**
 	 * 返回全部列表
@@ -93,6 +99,10 @@ public class GoodsController {
 	public Result delete(Long [] ids){
 		try {
 			goodsService.delete(ids);
+			
+			//清除solr中的item数据
+			itemSearchService.deleteByGoodsIds(Arrays.asList(ids));
+			
 			return new Result(true, "删除成功"); 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -123,6 +133,16 @@ public class GoodsController {
 		
 		try {
 			goodsService.updateStatus(ids, status);
+			if("1".equals(status)) { //审核通过
+				//获取item列表
+				List<TbItem> itemList = goodsService.findItemListByGoodsIdAndStatus(ids, status);
+				if(itemList!=null && itemList.size()>0) {
+					System.out.println("将"+itemList.size()+"条item数据更新到solr");
+					itemSearchService.importList(itemList);
+				}else {
+					System.out.println("没有item数据需要更新到solr");
+				}
+			}
 			return new Result(true, "成功");
 		} catch (Exception e) {
 			e.printStackTrace();

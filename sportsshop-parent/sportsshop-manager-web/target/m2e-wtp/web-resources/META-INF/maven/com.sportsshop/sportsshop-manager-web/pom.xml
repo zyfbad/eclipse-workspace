@@ -102,6 +102,11 @@
 		<artifactId>sportsshop-common</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</dependency>
+	<dependency>
+		<groupId>com.sportsshop</groupId>
+		<artifactId>sportsshop-search-interface</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
   </dependencies>
   
   
