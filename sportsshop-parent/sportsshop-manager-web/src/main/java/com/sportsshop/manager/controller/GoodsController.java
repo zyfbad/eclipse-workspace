@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.sportsshop.page.service.ItemPageService;
 import com.sportsshop.pojo.TbGoods;
 import com.sportsshop.pojo.TbItem;
 import com.sportsshop.pojogroup.Goods;
@@ -150,4 +151,11 @@ public class GoodsController {
 		}
 	}
 	
+	@Reference
+	private ItemPageService itemPageService;
+	
+	@RequestMapping("/genHtml")
+	public void genHtml(Long goodsId) {
+		itemPageService.genItemHtml(goodsId);
+	}
 }
