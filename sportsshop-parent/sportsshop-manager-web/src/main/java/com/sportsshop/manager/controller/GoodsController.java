@@ -135,6 +135,8 @@ public class GoodsController {
 		try {
 			goodsService.updateStatus(ids, status);
 			if("1".equals(status)) { //审核通过
+				
+				//更新solr索引库
 				//获取item列表
 				List<TbItem> itemList = goodsService.findItemListByGoodsIdAndStatus(ids, status);
 				if(itemList!=null && itemList.size()>0) {
@@ -142,6 +144,11 @@ public class GoodsController {
 					itemSearchService.importList(itemList);
 				}else {
 					System.out.println("没有item数据需要更新到solr");
+				}
+				
+				//生成静态网页
+				for(Long goodsId: ids) {
+					itemPageService.genItemHtml(goodsId);
 				}
 			}
 			return new Result(true, "成功");

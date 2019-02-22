@@ -291,5 +291,6 @@
 		<module>sportsshop-search-web</module>
 		<module>sportsshop-page-interface</module>
 		<module>sportsshop-page-service</module>
+		<module>sportsshop-page-web</module>
 	</modules>
 </project>

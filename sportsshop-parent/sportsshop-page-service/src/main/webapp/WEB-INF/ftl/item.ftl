@@ -14,13 +14,14 @@
     <link rel="stylesheet" type="text/css" href="css/widget-cartPanelView.css" />
     
     <!-- angularjs -->
+	
 	<script type="text/javascript" src="plugins/angularjs/angular.min.js"></script>
-    
+	
     <script type="text/javascript" src="js/base.js"></script>
     <script type="text/javascript" src="js/controller/itemController.js"></script>
     
-    <script type="text/javascript">
-    	var itemList = [
+   <script>
+    	var skuList = [
     		<#list itemList as item>
     		{
     			"id":${item.id?c},
@@ -33,7 +34,8 @@
     </script>
 </head>
 
-<body ng-app="pinyougou" ng-controller="itemController" ng-init="goodsNum=1">
+<body ng-app="pinyougou" ng-controller="itemController" ng-init="goodsNum=1;loadDefaultItem()">
+	  
 <!-- 顶部开始 -->
 	<#include "head.ftl">
 <!-- 顶部结束 -->
@@ -89,7 +91,7 @@
 				</div>
 				<div class="fr itemInfo-wrap">
 					<div class="sku-name">
-						<h4>${goods.goodsName}</h4>
+						<h4>{{sku.title}}</h4><!-- {{sku.title}} -->
 					</div>
 					<div class="news"><span>${goods.caption}</span></div>
 					<div class="summary">
@@ -99,7 +101,7 @@
 							</div>
 							<div class="fl price">
 								<i>¥</i>
-								<em>${goods.price}</em>
+								<em>{{sku.price}}</em>
 								<span>降价通知</span>
 							</div>
 							<div class="fr remark">
@@ -146,8 +148,8 @@
 								</dt>
 							  <#list item.attributeValue as pojo>
 								<dd><a href="javascript:;" 
-									class="{{isSelectedSepc(${item.attributeName}, ${pojo})?'selected':''}}"
-									ng-click="selectSpecification(${item.attributeName}, ${pojo})" >${pojo}<span title="点击取消选择">&nbsp;</span>
+									class="{{isSelectedSepc('${item.attributeName}', '${pojo}')?'selected':''}}" 
+									 ng-click="selectSpecification('${item.attributeName}', '${pojo}')">${pojo}<span title="点击取消选择">&nbsp;</span>
 									</a>
 								</dd>
 							  </#list>
@@ -159,7 +161,7 @@
 							<div class="fl title">
 								<div class="control-group">
 									<div class="controls">
-										<input autocomplete="off" type="text" value="1" minnum="1" class="itxt" />
+										<input autocomplete="off" type="text" value="{{goodsNum}}" minnum="1" class="itxt" />
 										<a href="javascript:void(0)" ng-click="addNum(1)" class="increment plus">+</a>
 										<a href="javascript:void(0)" ng-click="addNum(-1)" class="increment mins">-</a>
 									</div>
@@ -168,7 +170,7 @@
 							<div class="fl">
 								<ul class="btn-choose unstyled">
 									<li>
-										<a href="cart.html" target="_blank" class="sui-btn  btn-danger addshopcar">加入购物车</a>
+										<a href="#" ng-click="addToCart()" target="" class="sui-btn  btn-danger addshopcar">加入购物车</a>
 									</li>
 								</ul>
 							</div>
