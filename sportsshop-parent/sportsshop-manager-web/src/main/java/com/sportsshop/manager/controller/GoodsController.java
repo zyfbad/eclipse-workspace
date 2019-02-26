@@ -1,16 +1,22 @@
 package com.sportsshop.manager.controller;
-import java.util.Arrays;
 import java.util.List;
 
+import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.sportsshop.page.service.ItemPageService;
+import com.alibaba.fastjson.JSON;
 import com.sportsshop.pojo.TbGoods;
 import com.sportsshop.pojo.TbItem;
 import com.sportsshop.pojogroup.Goods;
-import com.sportsshop.search.service.ItemSearchService;
 import com.sportsshop.sellergoods.service.GoodsService;
 
 import entity.PageResult;
@@ -27,8 +33,27 @@ public class GoodsController {
 	@Reference
 	private GoodsService goodsService;
 	
-	@Reference
-	private ItemSearchService itemSearchService;
+	/*@Reference
+	private ItemSearchService itemSearchService;*/
+	
+	/*@Reference
+	private ItemPageService itemPageService;*/
+	
+	@Autowired
+	private JmsTemplate jmsTemplate;
+	
+	@Autowired
+	private Destination queueSolrAddDestination; //用于solr添加
+	
+	@Autowired
+	private Destination queueSolrDeleteDestination; //用于solr删除
+	
+	@Autowired
+	private Destination topicPageDestination; //用于生产商品详细页面
+	
+	@Autowired
+	private Destination topicPageDeleteDestination; //用于删除商品详细页
+	
 	
 	/**
 	 * 返回全部列表
@@ -97,13 +122,33 @@ public class GoodsController {
 	 * @return
 	 */
 	@RequestMapping("/delete")
-	public Result delete(Long [] ids){
+	public Result delete(final Long [] ids){
 		try {
 			goodsService.delete(ids);
 			
 			//清除solr中的item数据
-			itemSearchService.deleteByGoodsIds(Arrays.asList(ids));
+			//itemSearchService.deleteByGoodsIds(Arrays.asList(ids));
 			
+			//发消息，清除solr
+			jmsTemplate.send(queueSolrDeleteDestination, new MessageCreator() {
+				
+				@Override
+				public Message createMessage(Session session) throws JMSException {
+					
+					return session.createObjectMessage(ids);
+					
+				}
+			});
+			
+			//发消息，删除商品详细页
+			jmsTemplate.send(topicPageDeleteDestination, new MessageCreator() {
+				
+				@Override
+				public Message createMessage(Session session) throws JMSException {
+					
+					return session.createObjectMessage(ids);
+				}
+			});
 			return new Result(true, "删除成功"); 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -141,14 +186,32 @@ public class GoodsController {
 				List<TbItem> itemList = goodsService.findItemListByGoodsIdAndStatus(ids, status);
 				if(itemList!=null && itemList.size()>0) {
 					System.out.println("将"+itemList.size()+"条item数据更新到solr");
-					itemSearchService.importList(itemList);
+					//itemSearchService.importList(itemList); //改为jms
+					final String jsonString = JSON.toJSONString(itemList);
+					jmsTemplate.send(queueSolrAddDestination, new MessageCreator() {
+						
+						@Override
+						public Message createMessage(Session session) throws JMSException {
+					
+							return session.createTextMessage(jsonString);
+							
+						}
+					});
 				}else {
 					System.out.println("没有item数据需要更新到solr");
 				}
 				
 				//生成静态网页
-				for(Long goodsId: ids) {
-					itemPageService.genItemHtml(goodsId);
+				for(final Long goodsId: ids) {
+					//itemPageService.genItemHtml(goodsId);
+					jmsTemplate.send(topicPageDestination, new MessageCreator() {
+						
+						@Override
+						public Message createMessage(Session session) throws JMSException {
+							return session.createObjectMessage(goodsId);
+						}
+					});
+					
 				}
 			}
 			return new Result(true, "成功");
@@ -158,11 +221,10 @@ public class GoodsController {
 		}
 	}
 	
-	@Reference
-	private ItemPageService itemPageService;
+	
 	
 	@RequestMapping("/genHtml")
 	public void genHtml(Long goodsId) {
-		itemPageService.genItemHtml(goodsId);
+		//itemPageService.genItemHtml(goodsId);
 	}
 }
