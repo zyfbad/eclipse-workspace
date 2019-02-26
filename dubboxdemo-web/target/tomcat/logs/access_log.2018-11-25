@@ -1,0 +1,4 @@
+0:0:0:0:0:0:0:1 - - [25/Nov/2018:13:43:49 +0800] "GET /user/showName.do HTTP/1.1" 500 18473 http-bio-8082-exec-1 1880
+0:0:0:0:0:0:0:1 - - [25/Nov/2018:13:43:49 +0800] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-8082-exec-2 18
+0:0:0:0:0:0:0:1 - - [25/Nov/2018:14:16:07 +0800] "GET /user/showName.do HTTP/1.1" 200 3 http-bio-8082-exec-1 2950
+0:0:0:0:0:0:0:1 - - [25/Nov/2018:14:16:07 +0800] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-8082-exec-2 19
