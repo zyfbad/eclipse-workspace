@@ -1,0 +1,17 @@
+0:0:0:0:0:0:0:1 - - [03/Mar/2019:10:00:55 +0800] "GET /shoplogin.html HTTP/1.1" 200 2926 http-bio-9104-exec-2 87
+0:0:0:0:0:0:0:1 - - [03/Mar/2019:10:00:55 +0800] "GET /login_register_Style/css/login.css HTTP/1.1" 200 1182 http-bio-9104-exec-4 9
+0:0:0:0:0:0:0:1 - - [03/Mar/2019:10:00:55 +0800] "GET /login_register_Style/css/bootstrap.min.css HTTP/1.1" 200 122544 http-bio-9104-exec-3 42
+0:0:0:0:0:0:0:1 - - [03/Mar/2019:10:00:55 +0800] "GET /login_register_Style/js/login.js HTTP/1.1" 200 22 http-bio-9104-exec-5 15
+0:0:0:0:0:0:0:1 - - [03/Mar/2019:10:00:55 +0800] "GET /loginStyle/images/shopcar.jpg HTTP/1.1" 302 - http-bio-9104-exec-6 39
+0:0:0:0:0:0:0:1 - - [03/Mar/2019:10:00:56 +0800] "GET /favicon.ico HTTP/1.1" 302 - http-bio-9104-exec-9 4
+0:0:0:0:0:0:0:1 - - [03/Mar/2019:10:01:04 +0800] "GET /register.html HTTP/1.1" 200 10130 http-bio-9104-exec-7 9
+0:0:0:0:0:0:0:1 - - [03/Mar/2019:10:01:04 +0800] "GET /login_register_Style/js/register.js HTTP/1.1" 200 22 http-bio-9104-exec-8 13
+0:0:0:0:0:0:0:1 - - [03/Mar/2019:10:01:04 +0800] "GET /login_register_Style/css/register.css HTTP/1.1" 200 1183 http-bio-9104-exec-10 20
+0:0:0:0:0:0:0:1 - - [03/Mar/2019:10:01:04 +0800] "GET /js/base.js HTTP/1.1" 200 66 http-bio-9104-exec-8 26
+0:0:0:0:0:0:0:1 - - [03/Mar/2019:10:01:04 +0800] "GET /js/controller/baseController.js HTTP/1.1" 200 1409 http-bio-9104-exec-10 24
+0:0:0:0:0:0:0:1 - - [03/Mar/2019:10:01:04 +0800] "GET /js/service/sellerService.js HTTP/1.1" 200 830 http-bio-9104-exec-2 35
+0:0:0:0:0:0:0:1 - - [03/Mar/2019:10:01:04 +0800] "GET /plugins/angularjs/angular.min.js HTTP/1.1" 200 129177 http-bio-9104-exec-7 106
+0:0:0:0:0:0:0:1 - - [03/Mar/2019:10:01:04 +0800] "GET /js/controller/sellerController.js HTTP/1.1" 200 2095 http-bio-9104-exec-5 9
+0:0:0:0:0:0:0:1 - - [03/Mar/2019:10:01:04 +0800] "GET /loginStyle/images/shopcar.jpg HTTP/1.1" 302 - http-bio-9104-exec-10 3
+0:0:0:0:0:0:0:1 - - [03/Mar/2019:10:01:04 +0800] "GET /loginStyle/images/shopcar.jpg HTTP/1.1" 302 - http-bio-9104-exec-5 6
+0:0:0:0:0:0:0:1 - - [03/Mar/2019:10:01:04 +0800] "GET /shoplogin.html HTTP/1.1" 200 2926 http-bio-9104-exec-5 5
