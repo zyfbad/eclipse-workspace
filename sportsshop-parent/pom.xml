@@ -295,5 +295,8 @@
 		<module>sportsshop-user-interface</module>
 		<module>sportsshop-user-service</module>
 		<module>sportsshop-user-web</module>
+		<module>sportsshop-cart-interface</module>
+		<module>sportsshop-cart-service</module>
+		<module>sportsshop-cart-web</module>
 	</modules>
 </project>

@@ -39,7 +39,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		//查找用户对象
 		TbUser user = userService.findOne(userId);
-		System.out.println(user.getId()+" "+user.getUsername());
+
 		if(user != null) {
 			if(user.getStatus().equals("1")) {
 				System.out.println("找到此人");

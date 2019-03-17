@@ -1,7 +1,9 @@
 package com.sportsshop.user.controller;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.messaging.simp.user.UserRegistryMessageHandler;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -119,4 +121,19 @@ public class UserController {
 		return userService.findPage(user, page, rows);		
 	}
 	
+	@RequestMapping("/getUserName")
+	public HashMap<String, String> getUserName(){
+
+		HashMap<String, String> map = new HashMap<>();
+
+		//security获取用户名
+		String userIdStr = SecurityContextHolder.getContext().getAuthentication().getName();
+		Long userId = Long.parseLong(userIdStr);
+		
+		TbUser user = userService.findOne(userId);
+		System.out.println(user.getUsername());
+		map.put("userName", user.getUsername());
+		
+		return map;
+	}
 }

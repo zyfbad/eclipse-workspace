@@ -22,7 +22,7 @@
 		<!-- 当前用户必须有ROLE_USER的角色才可以访问目录及其字目录 -->
 		<intercept-url pattern="/**" access="ROLE_USER"></intercept-url>
 		<!-- 开启表单登录功能 -->
-		<form-login login-page="/login.html" default-target-url="/admin/index.html" authentication-failure-url="/login.html" always-use-default-target="true"/>
+		<form-login login-page="/login.html" default-target-url="/home-index.html" authentication-failure-url="/login.html" always-use-default-target="true"/>
 		<csrf disabled="true"/>
 		<headers>
 			<frame-options policy="SAMEORIGIN"/>
