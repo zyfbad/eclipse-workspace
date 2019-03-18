@@ -14,12 +14,12 @@ public class HelloWorldController {
 	
 	@RequestMapping("/info")
 	public String info() {
-		return "hello world "+env.getProperty("url");
+		return "info: hello world "+env.getProperty("url");
 	}
 	
 	@RequestMapping("/info2")
 	public String info2() {
-		return "22222 "+env.getProperty("url");
+		return "info2: hello world "+env.getProperty("url");
 	}
 }
 
